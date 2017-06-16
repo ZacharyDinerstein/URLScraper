@@ -107,6 +107,7 @@
 
    /* 
     * XXX  removePhoneNums => Remove phone numbers from array.
+    *   if => If href is a legitimate path, add to array.
     */   
     function removePhoneNums($oldURLs){
         printResultsSimple("<h2>Array before removePhoneNums</h2>");
@@ -116,7 +117,7 @@
         foreach($oldURLs as $item) {
             printResultsSimple($item->getAttribute('href'));
 
-           if(preg_match("(\/([a-zA-Z0-9+\$_-]\.?)+|\.)", $item->getAttribute('href') ) ){
+            if(preg_match("(\/([a-zA-Z0-9+\$_-]\.?)+|(\D\.\D))", $item->getAttribute('href') ) ){
                 array_push($matchUrl, $item);
            }
            $i++;
@@ -146,6 +147,26 @@
             $i++;
         }
         echo "Length: " . $i . "<br />";
+        return $cleanArray;
+    }
+
+    function addForwardSlashs($oldURLs){
+        printResultsSimple("<h2>Array before addForwardSlashes</h2>");
+
+        $cleanArray = array();
+
+        foreach ($oldURLs as $item) {
+            $href = ($item->getAttribute('href'));
+            $firstChar = (substr( $href, 0, 1 ));
+            if( $firstChar !== "/" ){
+                 // $item['href'] = "/" . $href; 
+
+
+                 //FINISH WRITING THIS CODE. Add new href value into $item object.
+                echo $item;
+            }
+            array_push($cleanArray, $item);
+        }
         return $cleanArray;
     }
 
@@ -195,6 +216,7 @@
     $essentialURLs = removeExternalLinks($hrefs, $parsedPath);
     $essentialURLs = removePhoneNums($essentialURLs);
     $essentialURLs = removeDuplicates($essentialURLs);
+    $essentialURLs = addForwardSlashs($essentialURLs);
     printResults("Essential URLS", $essentialURLs, 'href');
     createCSV($essentialURLs);
 ?>
