@@ -96,13 +96,10 @@
         $i = 0;
 
         foreach($oldURLs as $item) {
-            // printResultsSimple($item->getAttribute('href'));
-             $url = grabURLPath();
-            var_dump($item);
-             $cleanURL = str_replace($url, "", $item->getAttribute('href')); //Replace the url to empty string
-            echo $cleanURL;
-            if(preg_match("(\/([a-zA-Z0-9+\$_-]\.?)+|(\D\.\D))", $cleanURL->getAttribute('href') ) ){
-                array_push($matchUrl, $cleanURL);
+            printResultsSimple($item->getAttribute('href'));
+
+            if(preg_match("(\/([a-zA-Z0-9+\$_-]\.?)+|(\D\.\D))", $item->getAttribute('href') ) ){
+                array_push($matchUrl, $item);
            }
            $i++;
         }
@@ -164,8 +161,7 @@
    /* 
     * XXX  addForwardSlashs => If a URL doesn't begin with a "/", add that character.
     */   
-    function addForwardSlashs($oldURLs){
-        // printResultsSimple("<h2>Array before addForwardSlashes</h2>");
+        printResultsSimple("<h2>Array before addForwardSlashes</h2>");
 
         $cleanArray = array();
 
@@ -242,6 +238,7 @@
     $essentialURLs = removeWhiteSpace($essentialURLs);
     $essentialURLs = addForwardSlashs($essentialURLs);
     $essentialURLs = removeDuplicates($essentialURLs);
+    $essentialURLs = addForwardSlashs($essentialURLs);
     printResults("Essential URLS", $essentialURLs, 'href');
     createCSV($essentialURLs);
 ?>
