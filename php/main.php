@@ -1,20 +1,4 @@
 <?php
-    // Testing New Code
-    function newStuff(){
-        $swissNumberStr = "044 668 18 00";
-        $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
-        try {
-            $swissNumberProto = $phoneUtil->parse($swissNumberStr, "CH");
-            // var_dump($swissNumberProto);
-        } catch (\libphonenumber\NumberParseException $e) {
-            // var_dump($e);
-        }
-
-        $isValid = $phoneUtil->isValidNumber($swissNumberProto);
-        var_dump($isValid); // true
-    }
-
-
    /* HELPER FUNCTIONS */      
 
 
@@ -52,6 +36,7 @@
 
     function grabURLPath(){
         return $path = $_GET['url'];
+
     }
 
     function grabParsedPath($path){
@@ -65,10 +50,6 @@
 
         // grab all the paths on the page
         $xpath = new DOMXPath($dom);
-        
-            print_r($xpath);
-            echo "<br / >";
-
         return $hrefs = $xpath->evaluate("/html/body//a");
     }
 
@@ -83,14 +64,14 @@
     function removeExternalLinks($oldURLs, $parsedPath){
         $list = array();
 
-        printResultsSimple("<h2>Full Array before removeExternalLinks</h2>");
+        // printResultsSimple("<h2>Full Array before removeExternalLinks</h2>");
 
         for ($i = 0; $i < $oldURLs->length; $i++) {
-        	$href = $oldURLs->item($i);
-        	$url = $href->getAttribute('href');
+            $href = $oldURLs->item($i);
+            $url = $href->getAttribute('href');
             $parsedUrl = parse_url($url);
 
-            printResultsSimple($url);
+            // printResultsSimple($url);
             
             if(isset($parsedUrl["host"]) && ( $parsedUrl["host"] != $parsedPath['host']) ){
                 //this is a link to an external site - we dont want it, do nothing 
@@ -100,31 +81,48 @@
             }
         }
 
-        echo "Length: " . $i . "<br />";
+        // echo "Length: " . $i . "<br />";
         return $list;
     }
 
 
    /* 
     * XXX  removePhoneNums => Remove phone numbers from array.
+    *   if => If href is a legitimate path, add to array.
     */   
     function removePhoneNums($oldURLs){
-        printResultsSimple("<h2>Array before removePhoneNums</h2>");
+        // printResultsSimple("<h2>Array before removePhoneNums</h2>");
         $matchUrl = array();
         $i = 0;
 
         foreach($oldURLs as $item) {
-            printResultsSimple($item->getAttribute('href'));
-
-           if(preg_match("(\/([a-zA-Z0-9+\$_-]\.?)+|\.)", $item->getAttribute('href') ) ){
-                array_push($matchUrl, $item);
+            // printResultsSimple($item->getAttribute('href'));
+             $url = grabURLPath();
+            var_dump($item);
+             $cleanURL = str_replace($url, "", $item->getAttribute('href')); //Replace the url to empty string
+            echo $cleanURL;
+            if(preg_match("(\/([a-zA-Z0-9+\$_-]\.?)+|(\D\.\D))", $cleanURL->getAttribute('href') ) ){
+                array_push($matchUrl, $cleanURL);
            }
            $i++;
         }
-        echo "Length: " . $i . "<br />";
+        // echo "Length: " . $i . "<br />";
         return $matchUrl;
     }
-     
+
+
+   /* 
+    * XXX  removeWhiteSpace => Remove any starting or trailing whitespaces from URLs, and replace all mid-string whitespace with %20.
+    */   
+    function removeWhiteSpace($oldURLs){
+        foreach ($oldURLs as $item) {
+            for ($i = 0; $i < $item->attributes->length; ++$i) {
+                $item->attributes->item($i)->nodeValue = str_replace(' ', '%20', trim($item->attributes->item($i)->nodeValue));
+            }
+        }
+        return $oldURLs;
+    }
+
 
    /* 
     * XXX  removeDuplicates => Remove duplicate objects from array.
@@ -146,7 +144,54 @@
             $i++;
         }
         echo "Length: " . $i . "<br />";
+
+        echo "<h2>DUPLICATES</h2>";
+        foreach ($duplicates as $duplicate) {
+            $href = ($item->getAttribute('href'));
+            echo $duplicate . "<br />";
+        }
+
+        echo "<h2>CLEAN ARRAY</h2>"; 
+        foreach ($cleanArray as $item) {
+            $href = ($item->getAttribute('href'));
+
+            printResultsSimple($href);
+        }
         return $cleanArray;
+    }
+
+
+   /* 
+    * XXX  addForwardSlashs => If a URL doesn't begin with a "/", add that character.
+    */   
+    function addForwardSlashs($oldURLs){
+        // printResultsSimple("<h2>Array before addForwardSlashes</h2>");
+
+        $cleanArray = array();
+
+        foreach ($oldURLs as $item) {
+            $href = ($item->getAttribute('href'));
+            $firstChar = (substr( $href, 0, 1 ));
+            
+            // echo $href . "<br />";
+            // echo $firstChar . "<br /><br />";
+
+            if( $firstChar !== "/" ){
+                for ($i = 0; $i < $item->attributes->length; ++$i) {
+                    $item->attributes->item($i)->nodeValue = "/" . $item->attributes->item($i)->nodeValue;
+
+                    // echo "NEW HREF VALUE<br />";
+                    // echo $item->attributes->item($i)->nodeValue;
+                    // echo "<br /><br />";
+                }
+            }
+        }
+
+        foreach ($oldURLs as $item){
+            $href = ($item->getAttribute('href'));
+            // echo $href . "<br />";
+        }
+        return $oldURLs;
     }
 
    /* XXX
@@ -162,31 +207,31 @@
     */
     function createCSV($finalURLs){
         $file = fopen('demosaved.csv', 'w');
-        fputcsv($file, array('label', 'url', 'isLead'));
+        fputcsv($file, array('label', 'url', 'campaignID', 'isLead', 'isEmail'));
 
         foreach($finalURLs as $result) {
             $data = array();
+           
             $path = parse_url($result->getAttribute('href'), PHP_URL_PATH);
             $params = parse_url($result->getAttribute('href'), PHP_URL_QUERY);
 
             if (!empty($params)){
                 $path = $path . "?" . $params;
             }
-
+            
             $label = trim( preg_replace('/[^A-Za-z0-9\- ]/', '', $result->nodeValue) );
             if ($label == ''){$label = 'Blank';}
 
             array_push($data, $label);
             array_push($data, $path);
-            array_push($data, 'no');
+            array_push($data, '');
+            array_push($data, 'N');
+            array_push($data, 'N');
 
             fputcsv($file, $data);
         } 
         fclose($file);
     }
-
-
-    newStuff();
 
     $path = grabURLPath();
     $parsedPath = grabParsedPath($path);
@@ -194,6 +239,8 @@
 
     $essentialURLs = removeExternalLinks($hrefs, $parsedPath);
     $essentialURLs = removePhoneNums($essentialURLs);
+    $essentialURLs = removeWhiteSpace($essentialURLs);
+    $essentialURLs = addForwardSlashs($essentialURLs);
     $essentialURLs = removeDuplicates($essentialURLs);
     printResults("Essential URLS", $essentialURLs, 'href');
     createCSV($essentialURLs);
@@ -204,8 +251,13 @@
 
 <!-- 
 ***TO DO***
-- Test this on https://fl.pluginkaraoke.com . Make sure we're grabbing all internal links.
-    - WE're losing links because of the removeNums function. It's too agressive. Make it more specific. Instead of Regex, a good solution might be libphonenumber by google.
+- Make sure removeDuplicates isn't removing too many.
+- Allow program to scrape the second level of urls on any site, not just the root URL
+
+- Test on multiple sites to make sure we're not loosing any links that we want to keep. 
+
+- Clean up addForwardSlashes function
+
 
 - Build a frontend for program
 - Refactor var names
