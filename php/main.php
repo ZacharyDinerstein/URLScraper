@@ -216,7 +216,7 @@
     $essentialURLs = removeExternalLinks($hrefs, $parsedPath);
     $essentialURLs = removePhoneNums($essentialURLs);
     $essentialURLs = removeDuplicates($essentialURLs);
-    $essentialURLs = addForwardSlashs($essentialURLs);
+    // $essentialURLs = addForwardSlashs($essentialURLs);
     printResults("Essential URLS", $essentialURLs, 'href');
     createCSV($essentialURLs);
 ?>
