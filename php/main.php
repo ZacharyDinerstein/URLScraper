@@ -58,6 +58,21 @@
         return $hrefs = $xpath->evaluate("/html/body//a");
     }
 
+   /* XXX
+    *   runProgram => Run through program and strip hrefs down to essentials
+    * XXX
+    */
+    function runProgram($hrefs, $parsedPath){
+        $essentialURLs = removeExternalLinks($hrefs, $parsedPath);
+        $essentialURLs = removePhoneNums($essentialURLs);
+        $essentialURLs = removeWhiteSpace($essentialURLs);
+        $essentialURLs = removePrePath($essentialURLs, $parsedPath);
+        $essentialURLs = addForwardSlashs($essentialURLs);
+        $essentialURLs = removeDuplicates($essentialURLs);
+        printResults("Essential URLS", $essentialURLs, 'href');
+        return $essentialURLs;
+    }
+
 
    /* XXX
     * RemoveExternalLinks => Keep only array items that are internal links
@@ -129,7 +144,8 @@
    /* 
     * XXX   removePrePath => Remove everything from the URL except from the path and params.
     *           if the url's host (www.anything.com) is within the href...
-
+                    - strstr(...) => Remove any possible protocols (http, etc).
+                    - str_replace(...) => remove the host from the href.
     */ 
     function removePrePath($oldURLs, $parsedPath){
         $i = 0;
@@ -142,17 +158,19 @@
 
             if (strpos($href, $parsedPath['host']) !== false) {
                 $newHref = strstr($href, $parsedPath['host']);
-                echo "NEWHREF: " . $newHref . "<br />";
+                echo "NEW HREF: " . $newHref . "<br />";
                 $newHref = str_replace($parsedPath['host'], '', $newHref);
+                echo "NEWER HREF: " . $newHref . "<br />";
 
-
-                // PROBLEM'S HERE***
-                $item->attributes->item(0)->nodeValue = $newHref;
+                for ($i = 0; $i < $item->attributes->length; ++$i){
+                    $item->attributes->item($i)->nodeValue = $newHref;
+                }
 
                 $printIt = $item->getAttribute('href');
                 echo "No Pre PATH: ";
                 printResultsSimple($printIt);
             }
+            echo "<br />";
         }
 
         printResultsSimple("<h2>Array after removePrePath</h2>");
@@ -276,23 +294,23 @@
         fclose($file);
     }
 
+    function extendUrls($oldURLs){
+        $masterUrls = array();
+
+        foreach($oldURLs as $item){
+            
+        }
+    }
+
+
     $path = grabURLPath();
     $parsedPath = grabParsedPath($path);
-
-    myDump($parsedPath, 'scheme');
-    myDump($parsedPath, 'host');
-    myDump($parsedPath, 'path');
-
     $hrefs = grabHrefs($path);
 
-    $essentialURLs = removeExternalLinks($hrefs, $parsedPath);
-    $essentialURLs = removePhoneNums($essentialURLs);
-    $essentialURLs = removeWhiteSpace($essentialURLs);
-    $essentialURLs = removePrePath($essentialURLs, $parsedPath);
-    $essentialURLs = addForwardSlashs($essentialURLs);
-    $essentialURLs = removeDuplicates($essentialURLs);
-    printResults("Essential URLS", $essentialURLs, 'href');
+    $essentialURLs = runProgram($hrefs, $parsedPath);
+    extendUrls($essentialURLs);
     createCSV($essentialURLs);
+
 ?>
 
 
@@ -300,23 +318,30 @@
 
 <!-- 
 ***TO DO***
-- Test to make sure pre path remover is working correctly on all sites
-
-
+- Allow program to scrape the second level of urls on any site, not just the root URL
 
 - make the scrapper add in a blank entry & an "/" entry for every site.
 
-
-
-- Make sure removeDuplicates isn't removing too many.
-- Allow program to scrape the second level of urls on any site, not just the root URL
-
 - Test on multiple sites to make sure we're not loosing any links that we want to keep. 
 
-- Clean up addForwardSlashes function
 
 
 - Build a frontend for program
+- Consolidate functions (there's a ton of repitition)
 - Refactor var names
 - Comment functions
+
+CHECKLIST
+    Number of links each site should have:
+        - Plugin Karaoke = 19 w/o root urls ('', '/', '/#');
+        - Plaza College = About 83  (We only have 45)
+
+
+
+
+
+
+    myDump($parsedPath, 'scheme');
+    myDump($parsedPath, 'host');
+    myDump($parsedPath, 'path');
  -->

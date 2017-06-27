@@ -1,254 +1,35 @@
 label,url,campaignID,isLead,isEmail
-"The Wall Street Journal",/http://www.wsj.com,,N,N
-Home,/,,N,N
-"Todays Paper",/itp,,N,N
-World,/news/world,,N,N
-Africa,/news/world/africa,,N,N
-Asia,/news/world/asia,,N,N
-Canada,/news/world/canada,,N,N
-China,/news/world/china,,N,N
-Europe,/news/world/europe,,N,N
-"Latin America",/news/world/latin-america,,N,N
-"Middle East",/news/world/middle-east,,N,N
-Economy,/news/economy,,N,N
-"World Video",/video/browse/news/world-news,,N,N
-US,/news/us,,N,N
-Law,/news/business/law-legal,,N,N
-"New York",/public/page/new-york-main.html,,N,N
-Politics,/news/politics,,N,N
-"The Numbers",/news/types/the-numbers,,N,N
-"Journal Report",/public/page/journal-report.html,,N,N
-"US Video",/video/browse/news/us-news,,N,N
-"Whats News Podcast",/podcasts/latest/wsj-whats-news,,N,N
-"Politics Video",/video/browse/news/politics-and-campaign,,N,N
-"Economy Video",/video/browse/business/economy,,N,N
-Business,/news/business,,N,N
-Management,/news/business/management,,N,N
-TechWSJD,/news/technology,,N,N
-"Aerospace  Defense",/news/business/defense-aerospace,,N,N
-"Autos  Transportation",/news/business/transportation,,N,N
-"Commercial Real Estate",/public/page/news-real-estate-commercial.html,,N,N
-"Consumer Products",/news/business/consumer-products,,N,N
-Energy,/news/business/energy-oil-gas,,N,N
-Entrepreneurship,/news/business/small-business-marketing,,N,N
-"Financial Services",/news/business/financial-services,,N,N
-"Food  Services",/news/business/food-tobacco,,N,N
-"Health Care",/news/business/health-industry,,N,N
-Hospitality,/news/business/hotels-casinos,,N,N
-Manufacturing,/news/business/industrial-services,,N,N
-"Media  Marketing",/news/business/media-marketing,,N,N
-"Natural Resources",/news/business/natural-resources,,N,N
-Retail,/news/business/retail-industry,,N,N
-"CFO Journal",/news/cfo-journal,,N,N
-"CIO Journal",/news/cio-journal,,N,N
-"CMO Today",/news/cmo-today,,N,N
-"Logistics Report",/news/logistics-report,,N,N
-"Risk  Compliance",/news/risk-compliance-journal,,N,N
-"Bankruptcy Beat",/pro/bankruptcy,,N,N
-"Heard on the Street",/news/heard-on-the-street,,N,N
-"Business Video",/video/browse/business,,N,N
-"Geoffrey Fowler",/news/author/8489,,N,N
-"Christopher Mims",/news/author/8003,,N,N
-"Joanna Stern",/news/author/7872,,N,N
-"Li Yuan",/news/author/8315,,N,N
-"Tech Video",/video/browse/tech,,N,N
-"Tech Podcast",/podcasts/latest/wsj-tech-news-briefing,,N,N
-Markets,/news/markets,,N,N
-Bonds,/public/page/news-fixed-income-bonds.html,,N,N
-"Commodities  Futures",/news/markets/oil-gold-commodities-futures,,N,N
-Currencies,/public/page/news-currency-currencies-trading.html,,N,N
-Deals,/public/page/news-financial-markets-deals.html,,N,N
-"Financial Services",/public/page/news-wall-street.html,,N,N
-Funds,/public/page/etf-mutual-funds.html,,N,N
-Stocks,/public/page/news-stock-market-movers.html,,N,N
-"Your Money",/news/column/Your%20Money,,N,N
-"Wealth Adviser",/public/page/wealth-management-journal.html,,N,N
-"Ahead of the Tape",/news/types/ahead-of-the-tape,,N,N
-"Markets Video",/video/browse/business/markets,,N,N
-"Markets Podcast",/podcasts/latest/wsj-your-money-matters,,N,N
-"MoneyBeat Podcast",/podcasts/latest/wsj-moneybeat,,N,N
-"Heard on the Street Podcast",/podcasts/latest/wsj-heard-on-the-street,,N,N
-"Watching Your Wealth Podcast",/podcasts/latest/wsj-watching-your-wealth,,N,N
-Opinion,/news/opinion,,N,N
-"James Freeman",/news/author/5461,,N,N
-"William A Galston",/news/author/7800,,N,N
-"Daniel Henninger",/news/author/5468,,N,N
-"Holman W Jenkins",/news/author/5469,,N,N
-"William McGurn",/news/author/5470,,N,N
-"Peggy Noonan",/news/author/5356,,N,N
-"Mary Anastasia OGrady",/news/author/8590,,N,N
-"Jason Riley",/news/author/5678,,N,N
-"Kimberley A Strassel",/news/author/5472,,N,N
-Books,/news/types/bookshelf,,N,N
-Film,/news/types/film-review,,N,N
-Television,/news/types/television-review,,N,N
-Theater,/news/types/theater-review,,N,N
-Art,/news/types/art-review,,N,N
-"Masterpiece Series",/news/types/masterpiece,,N,N
-Music,/news/types/music-review,,N,N
-Dance,/news/types/dance-review,,N,N
-Opera,/news/types/opera-review,,N,N
-Exhibition,/news/types/exhibition-review,,N,N
-"Cultural Commentary",/news/types/cultural-commentary,,N,N
-Editorials,/news/types/review-outlook-u-s,,N,N
-Commentary,/news/types/commentary-u-s,,N,N
-"Letters to the Editor",/news/types/letters,,N,N
-"The Weekend Interview",/news/types/the-saturday-interview,,N,N
-"Potomac Watch Podcast",/podcasts/latest/wsj-opinion-potomac-watch,,N,N
-"Foreign Edition Podcast",/podcasts/latest/wsj-opinion-foreign-edition,,N,N
-"Opinion Video",/video/browse/opinion,,N,N
-"Notable  Quotable",/news/types/notable-quotable,,N,N
-"Best of the Web Newsletter",/newsletters,,N,N
-Arts,/news/arts?mod=topnav_arts,,N,N
-Books,/news/types/bookshelf?mod=topnav_arts,,N,N
-Film,/news/types/film-review?mod=topnav_arts,,N,N
-Television,/news/types/television-review?mod=topnav_arts,,N,N
-Theater,/news/types/theater-review?mod=topnav_arts,,N,N
-Art,/news/types/art-review?mod=topnav_arts,,N,N
-"Masterpiece Series",/news/types/masterpiece?mod=topnav_arts,,N,N
-"Arts Video",/video/browse/life-culture/arts-and-entertainment?mod=topnav_arts,,N,N
-"WSJ Magazine",/public/page/magazine-index.html?mod=topnav_arts,,N,N
-"Speakeasy Podcast",/podcasts/latest/wsj-speakeasy?mod=topnav_arts,,N,N
-Life,/news/life,,N,N
-Careers,/public/page/news-career-jobs.html,,N,N
-Cars,/public/page/news-autos-automotive.html,,N,N
-"Food  Drink",/public/page/news-food-cooking-drink.html,,N,N
-Health,/public/page/consumer-health-wellness.html,,N,N
-Ideas,/public/page/news-books-best-sellers.html,,N,N
-"Real Estate",/news/realestate,,N,N
-Science,/news/science,,N,N
-Sports,/public/page/news-sports-scores.html,,N,N
-"Style  Fashion",/public/page/news-fashion-style-industry.html,,N,N
-Travel,/public/page/news-travel-vacation.html,,N,N
-"Life Video",/video/browse/life-culture,,N,N
-"WSJ Magazine",/public/page/magazine-index.html,,N,N
-"Off Duty Podcast",/podcasts/latest/wsj-off-duty,,N,N
-"House of the Day",/houseoftheday,,N,N
-Mansion,/public/page/real-estate-luxury.html,,N,N
-"Real Estate Video",/video/subject/mansion,,N,N
-"Whats News",/news/whats-news,,N,N
-"Senate Republicans Delay Vote on Health-Care Bill",/https://www.wsj.com/articles/senate-health-bill-vote-delayed-until-after-congress-july-4-recess-1498586899,,N,N
-572,/articles/senate-health-bill-vote-delayed-until-after-congress-july-4-recess-1498586899,,N,N
-"Whats Next in the Process",/articles/senate-republican-health-bill-whats-next-in-the-process-1498583867?tesla=y,,N,N
-"Insurers Lament Loss of Individual Mandate",/articles/health-insurers-uneasy-with-senates-approach-to-continuous-coverage-1498580450?tesla=y,,N,N
-Blank,/https://www.wsj.com/articles/google-slapped-with-2-7-billion-eu-fine-over-search-results-1498556971,,N,N
-281,/articles/google-slapped-with-2-7-billion-eu-fine-over-search-results-1498556971,,N,N
-"Heard A Small Price to Pay for Scale",/articles/googles-eu-fine-is-a-small-price-to-pay-for-scale-1498582331?tesla=y,,N,N
-Blank,/https://www.wsj.com/articles/cyberattacks-hit-global-companies-in-europe-1498575793,,N,N
-82,/articles/cyberattacks-hit-global-companies-in-europe-1498575793,,N,N
-"How Bad Is the Crisis in Illinois It Has 146 Billion in Unpaid Bills",/https://www.wsj.com/articles/how-bad-is-the-crisis-in-illinois-it-has-14-6-billion-in-unpaid-bills-1498590946,,N,N
-63,/articles/how-bad-is-the-crisis-in-illinois-it-has-14-6-billion-in-unpaid-bills-1498590946,,N,N
-"Draghi Sparks Selloff in Global Bonds",/https://www.wsj.com/articles/draghi-sparks-selloff-in-global-bonds-1498576194,,N,N
-"Wireless Industrys Long Wait for Good News",/https://www.wsj.com/articles/wireless-industrys-long-wait-for-good-news-1498581548,,N,N
-"Sprint in Talks With Charter Comcast",/articles/sprint-enters-into-exclusive-talks-with-charter-comcast-on-wireless-deal-1498524087,,N,N
-"What a Deal Would Mean for Wireless Sector",/articles/what-a-sprint-deal-with-comcast-and-charter-would-mean-for-the-wireless-industry-1498586112?tesla=y,,N,N
-"Pentagon Sees Signs Syria Is Preparing Chemical Attack",/https://www.wsj.com/articles/pentagon-sees-signs-syria-is-preparing-for-chemical-attack-1498571456,,N,N
-82,/articles/pentagon-sees-signs-syria-is-preparing-for-chemical-attack-1498571456,,N,N
-Blank,/https://www.wsj.com/articles/trump-epa-move-to-rescind-obama-administrations-clean-water-rule-1498586400,,N,N
-Blank,/https://www.wsj.com/articles/puff-puff-pass-executives-at-edgy-companies-could-see-new-opportunities-go-up-in-smoke-1498572002,,N,N
-Blank,/https://www.wsj.com/articles/ups-to-freeze-pension-plans-for-nonunion-staffers-1498563670,,N,N
-"The New Eye-Opener Beer for Brunch",/https://www.wsj.com/articles/the-new-eye-opener-beer-for-brunch-1498578974,,N,N
-"The Family Memory You Think You Have",/https://www.wsj.com/articles/the-family-memory-you-think-you-have-1498574819,,N,N
-"USA Gymnastics Report Calls for Sweeping Changes in Wake of Sexual Abuse Scandal",/https://www.wsj.com/articles/usa-gymnastics-report-calls-for-sweeping-changes-in-wake-of-sexual-abuse-scandal-1498578053,,N,N
-"This Shipping Magnate Is Calling a Bottom in the Oil Rout",/https://www.wsj.com/articles/this-shipping-magnate-is-calling-a-bottom-in-the-oil-rout-1498555801,,N,N
-"Pandora CEO Westergren Resigns",/https://www.wsj.com/articles/pandora-media-co-founder-ceo-tim-westergren-resigns-1498571906,,N,N
-"Nestl Plans Share Buyback After Pressure From Activist Third Point",/https://www.wsj.com/articles/nestle-plans-20-8-billion-share-buyback-over-the-next-3-years-1498581756,,N,N
-"Blue Apron Turns to Deals to Lure Customers Ahead of IPO",/https://www.wsj.com/articles/stir-fry-on-sale-blue-apron-turns-to-deals-to-draw-customers-1498561202,,N,N
-Blank,/https://www.wsj.com/articles/apollo-breaks-record-as-investors-flock-to-buyout-funds-1498588118,,N,N
-Blank,/https://www.wsj.com/articles/a-new-real-estate-play-for-income-investors-1498561201,,N,N
-"White House Struggles to Find Community Banker for Fed Board",/https://www.wsj.com/articles/trump-administration-struggles-to-find-community-banker-for-fed-board-1498555801,,N,N
-"San Franciscos Housing Slowdown Could Spread",/https://www.wsj.com/articles/san-franciscos-housing-slowdown-could-spread-1498583304,,N,N
-"Maine Lawmakers Debate Whether to Keep Tax on High-Income Earners",/https://www.wsj.com/articles/maine-lawmakers-debate-whether-to-keep-voter-backed-tax-on-wealthy-1498585761,,N,N
-"Three Chicago Police Officers Indicted in Laquan McDonald Case",/https://www.wsj.com/articles/three-chicago-police-officers-indicted-in-laquan-mcdonald-case-1498592484,,N,N
-"Trump Aides Hire Lawyers Amid Probe Into Russian Hacking",/https://www.wsj.com/articles/trump-aides-hire-lawyers-for-probe-into-russian-election-hacking-1498573290,,N,N
-60,/articles/trump-aides-hire-lawyers-for-probe-into-russian-election-hacking-1498573290,,N,N
-"Elizabeth Warren Tries to Win Back Voters in Trump Country",/https://www.wsj.com/articles/elizabeth-warren-tries-to-win-back-voters-in-trump-country-1498555802,,N,N
-321,/articles/elizabeth-warren-tries-to-win-back-voters-in-trump-country-1498555802,,N,N
-"Merkel Opens Way for Vote on Gay Marriage",/https://www.wsj.com/articles/angela-merkel-opens-way-for-vote-on-gay-marriage-in-germany-1498591143,,N,N
-"Charges Against Temer Open New Fight in Brazil",/https://www.wsj.com/articles/charges-against-president-michel-temer-open-new-fight-in-brazil-1498578817,,N,N
-"Hostage to Chinas InsecurityIts Markets",/https://www.wsj.com/articles/hostage-to-chinas-insecurity-its-markets-1498556454,,N,N
-"Trump Administration Opens Marathon Nafta Hearings",/https://www.wsj.com/articles/trump-administration-opens-marathon-nafta-hearings-1498555802,,N,N
-Video,/video,,N,N
-World,/news/world/,,N,N
-"European Cities Are Just Saying No to Scandal-Tinged Diesel Vehicles",/https://www.wsj.com/articles/european-cities-are-just-saying-no-to-scandal-tinged-diesel-vehicles-1498558921,,N,N
-"Scotland Delays Plan for Second Independence Referendum",/https://www.wsj.com/articles/scotland-delays-plan-for-second-independence-referendum-1498580163,,N,N
-"North Korea Compares Donald Trump to Adolf Hitler",/https://www.wsj.com/articles/north-korea-compares-trump-to-hitler-1498541392,,N,N
-US,/news/us/,,N,N
-"Schools Colleges Contend With Costly Mold",/https://www.wsj.com/articles/schools-colleges-contend-with-costly-mold-1498555805,,N,N
-"One Student Apartment Two Mold-Test Results",/https://www.wsj.com/articles/one-student-apartment-two-mold-test-results-1498555803,,N,N
-"When the Mailman Unwittingly Becomes a Drug Dealer",/https://www.wsj.com/articles/when-the-mailman-unwittingly-becomes-a-drug-dealer-1498469403,,N,N
-Politics,/news/politics/,,N,N
-"GOP Leaders Scramble to Secure Health Bill Votes After CBO Leaves Lawmakers Wavering",/https://www.wsj.com/articles/senate-health-bill-raises-uninsured-by-22-million-in-2026-compared-to-aca-the-cbo-says-1498508907,,N,N
-"Senate Health Bill Whats Next After Delay",/https://www.wsj.com/articles/senate-republican-health-bill-whats-next-in-the-process-1498583867,,N,N
-"Supreme Court Allows Partial Enforcement of Travel Ban",/https://www.wsj.com/articles/supreme-court-allows-implementation-of-most-of-trump-travel-ban-1498487727,,N,N
-Economy,/news/economy/,,N,N
-"Yellen Globalization Technological Change Have Been Harmful to Many",/https://www.wsj.com/articles/yellen-u-s-financial-system-is-safer-and-sounder-than-before-crisis-1498586028,,N,N
-"IMF Cuts Forecast for US Cites Doubt on Trump Agenda",/https://www.wsj.com/articles/imf-lowers-forecast-for-u-s-economy-amid-rising-policy-uncertainty-1498568402,,N,N
-"Home-Price Growth Slows in April",/https://www.wsj.com/articles/home-price-growth-slows-in-april-1498568416,,N,N
-Business,/news/business/,,N,N
-"Estates of Madoff Sons Reach Ponzi Scheme Settlement",/https://www.wsj.com/articles/estates-of-madoff-sons-reach-ponzi-scheme-settlement-1498584617,,N,N
-"What a Sprint Deal With Comcast and Charter Would Mean for Wireless",/https://www.wsj.com/articles/what-a-sprint-deal-with-comcast-and-charter-would-mean-for-the-wireless-industry-1498586112,,N,N
-"For a More Productive Workforce Scientific Know-How Helps",/https://www.wsj.com/articles/for-a-more-productive-workforce-scientific-know-how-helps-1498572000,,N,N
-Tech,/news/technology/,,N,N
-"Sprint in Talks With Charter Comcast on Wireless Deal",/https://www.wsj.com/articles/sprint-enters-into-exclusive-talks-with-charter-comcast-on-wireless-deal-1498524087,,N,N
-"Chinas All-Seeing State Is Reading Its Citizens Faces",/https://www.wsj.com/articles/the-all-seeing-surveillance-state-feared-in-the-west-is-a-reality-in-china-1498493020,,N,N
-"Amazons Grocery Ambitions Spell Trouble for Food Brands",/https://www.wsj.com/articles/amazons-grocery-ambitions-spell-trouble-for-big-food-brands-1498469402,,N,N
-"If You Think Stocks Are Dull Look at the Economy",/https://www.wsj.com/articles/if-you-think-stocks-are-dull-look-at-the-economy-1498555804,,N,N
-"US Stocks Slide as Tech Sector Remains Under Pressure",/https://www.wsj.com/articles/global-markets-higher-australia-is-the-exception-1498532516,,N,N
-"MSCI Already Talking About Adding More Chinese Stocks",/https://www.wsj.com/articles/msci-already-talking-about-adding-more-chinese-stocks-1498555016,,N,N
-"Real Estate",/news/realestate/,,N,N
-"Apartment Market Has Tepid Second Quarter",/https://www.wsj.com/articles/apartment-market-has-tepid-second-quarter-1498582693,,N,N
-"Onetime Steve Wynn Estate on Lake Tahoe Sells for 311 Million",/https://www.wsj.com/articles/onetime-steve-wynn-estate-on-lake-tahoe-sells-for-31-1-million-1498572003,,N,N
-"Witness Says Real-Estate Magnate Played Role in Fraud Scheme",/https://www.wsj.com/articles/witness-says-real-estate-magnate-schorsch-played-role-in-fraud-scheme-1498561380,,N,N
-"FIFA Releases Secret Report on Internal Corruption",/https://www.wsj.com/articles/fifa-releases-secret-report-on-internal-corruption-1498585347,,N,N
-"Why Chris Sale Never Shakes Off His Catcher Like Ever",/https://www.wsj.com/articles/why-chris-sale-never-shakes-off-his-catcher-like-ever-1498487868,,N,N
-"Bill Russell Stole the NBAs Glitzy Awards Show With a One-Liner",/https://www.wsj.com/articles/bill-russell-stole-the-nbas-glitzy-awards-show-with-a-one-liner-1498577847,,N,N
-"A Hamptons Bungalow for All Seasons",/https://www.wsj.com/articles/a-hamptons-bungalow-for-all-seasons-1498572824,,N,N
-"An Insiders Guide to Touring Bordeaux",/https://www.wsj.com/articles/an-insiders-guide-to-touring-the-french-city-of-bordeaux-1498585651,,N,N
-"Designer Heels That Feel Like Birkenstocks",/https://www.wsj.com/articles/the-designer-heels-as-comfortable-as-birkenstocks-1498577294,,N,N
-"Their Towns Overrun With Tourists Some Italians Cry Basta",/https://www.wsj.com/articles/arrivederci-tourism-1498482003,,N,N
-"This 1967 Dodge Charger Still Makes Beautiful Music",/https://www.wsj.com/articles/this-1967-dodge-charger-still-makes-beautiful-music-1498569851,,N,N
-Arts,/news/arts,,N,N
-"Enterprising Bostonians",/https://www.wsj.com/articles/enterprising-bostonians-1498424780,,N,N
-"Mary Gaitskill Picks Cloudsplitter for WSJ Book Club",/https://www.wsj.com/articles/mary-gaitskill-picks-cloudsplitter-for-wsj-book-club-1498395601,,N,N
-"Self-Portraits and Photos for a David Hockney Birthday",/https://www.wsj.com/articles/self-portraits-and-photos-for-a-david-hockney-birthday-1498227916,,N,N
-"1984 Review Big Brother Worth Watching",/https://www.wsj.com/articles/1984-review-big-brother-worth-watching-1498177802,,N,N
-"Dentsu Aegis Hires Agency Veteran Nick Brien for Leadership Role",/https://www.wsj.com/articles/dentsu-aegis-hires-agency-veteran-nick-brien-for-leadership-role-1498592923,,N,N
-"Facebook Is Going Hollywood",/https://www.wsj.com/articles/facebook-is-going-hollywood-seeking-scripted-tv-programming-1498388401,,N,N
-"CMO Today Facebook Woos Hollywood Google Stops Scanning Emails to Target Ads Cannes 2017 Roundup",/https://www.wsj.com/articles/cmo-today-facebook-woos-hollywood-google-stops-scanning-emails-to-target-ads-cannes-2017-roundup-1498477962,,N,N
-"Shhh Look Its a Lesser-Spotted Refrigerated Maersk Container",/https://www.wsj.com/articles/shhh-look-its-a-lesser-spotted-refrigerated-maersk-container-1498581066,,N,N
-"Todays Top Supply Chain and Logistics News From WSJ",/https://www.wsj.com/articles/todays-top-supply-chain-and-logistics-news-from-wsj-1498559398,,N,N
-"A Unanimous Rebuke to Judges on the Travel Ban",/https://www.wsj.com/articles/a-unanimous-rebuke-to-judges-on-the-travel-ban-1498517289,,N,N
-"Why Didnt ObamaCare Make Us Healthier",/https://www.wsj.com/articles/why-didnt-obamacare-make-us-healthier-1498508891,,N,N
-"Religious Liberty Lives",/https://www.wsj.com/articles/religious-liberty-lives-1498517321,,N,N
-"Sign Up for Newsletters and Alerts",/public/page/email-setup.html,,N,N
-"How the iPhone Was Born Inside Stories of Missteps and Triumphs",/http://www.wsj.com/video/how-the-iphone-was-born-inside-stories-of-missteps-and-triumphs/302CFE23-392D-4020-B1BD-B4B9CEF7D9A8.html?mod=trending_now_video_1,,N,N
-"Next-Level Surveillance China Embraces Facial Recognition",/http://www.wsj.com/video/next-level-surveillance-china-embraces-facial-recognition/9ED95BFA-76EF-48DA-A56B-50126AFDDA1C.html?mod=trending_now_video_2,,N,N
-"John Cena -- the Triple Threat -- Moves Beyond Wrestling",/http://www.wsj.com/video/john-cena-the-triple-threat-moves-beyond-wrestling/1BDE549E-C526-4346-A2BF-E06E909954EF.html?mod=trending_now_video_3,,N,N
-"Film Clip The Beguiled",/http://www.wsj.com/video/film-clip-the-beguiled/27F5C60C-FD9A-4DF9-A6D0-F6480B4CAB52.html?mod=trending_now_video_5,,N,N
-"EUs Google Fine Set to Reshape Web Gatekeeping Roles",/https://www.wsj.com/articles/google-slapped-with-2-7-billion-eu-fine-over-search-results-1498556971?mod=trending_now_1,,N,N
-"Miranda Kerr Hands Over 81 Million in Jewelry to Justice Department",/https://www.wsj.com/articles/miranda-kerr-hands-over-8-1-million-in-jewelry-to-justice-department-1498511338?mod=trending_now_2,,N,N
-"Sprint in Talks With Charter Comcast on Wireless Deal",/https://www.wsj.com/articles/sprint-enters-into-exclusive-talks-with-charter-comcast-on-wireless-deal-1498524087?mod=trending_now_3,,N,N
-"Puerto Rico Puts Itself Up for Sale Piece by Piece",/https://www.wsj.com/articles/for-sale-puerto-rico-1498474800?mod=trending_now_4,,N,N
-"Its 5 OClock SomewhereUnless Youve Been Acquired by Wal-Mart",/https://www.wsj.com/articles/its-5-oclock-somewhereunless-youve-been-acquired-by-wal-mart-1498410840?mod=trending_now_5,,N,N
-"Journal Reports",/news/types/journal-reports-health-care,,N,N
-"Smartphones Open a New World for Medical Researchers",/https://www.wsj.com/articles/smartphones-open-a-new-world-for-medical-researchers-1498442821,,N,N
-"When Doctors Get Bad Reviews Online",/https://www.wsj.com/articles/what-doctors-are-doing-about-bad-reviews-online-1498442580,,N,N
-"The 10-Point",/10point,,N,N
-"Redesign Guided Tour",/guidedtour/,,N,N
-Guides,/public/page/guides.html,,N,N
-"My News",/watchlist/news,,N,N
-"RSS Feeds",/public/page/rss_news_and_feeds.html,,N,N
-Podcasts,/podcasts,,N,N
-Corrections,/news/column/Corrections,,N,N
-"News Archive",/public/page/archive.html,,N,N
-Podcasts,/http://www.wsj.com/public/page/podcast.html,,N,N
-DJX,/public/page/wsj-x-marketing.html,,N,N
-"WSJ Conference",/conferences,,N,N
-"WSJ Pro Central Banking",/pro/centralbanking,,N,N
-"Privacy Policy",/policy/privacy-policy,,N,N
-"Cookie Policy",/policy/cookie-policy,,N,N
-"Copyright Policy",/policy/copyright-policy,,N,N
-"Data Policy",/policy/data-policy,,N,N
-"Subscriber Agreement  Terms of Use",/policy/subscriber-agreement,,N,N
-"Your Ad Choices",/policy/cookie-policy,,N,N
+"terms of use",/images/Plugin%20Website%20-%20Terms%20of%20Use_FINAL.pdf,,N,N
+"Corporate Events",/ContentNew.aspx?sp=Corporate%20Events%20and%20Happy%20Hour,,N,N
+"Family Reunion",/ContentNew.aspx?sp=Family%20Reunions,,N,N
+"Friends Night",/ContentNew.aspx?sp=Get%20Together%20With%20Friends,,N,N
+"Birthday Parties",/ContentNew.aspx?sp=Birthday%20Bash,,N,N
+"Bachelor and Bachelorette",/ContentNew.aspx?sp=Bachelor%20and%20Bachelorette%20Parties,,N,N
+"Sweet 16s  Bar Mitzvahs",/ContentNew.aspx?sp=Sweet16,,N,N
+About,/ContentNew.aspx?sp=contentPage258,,N,N
+Franchising,/ContentNew.aspx?sp=contentPage259,,N,N
+Press,/press.aspx,,N,N
+"Price List",/packages.aspx,,N,N
+FAQ,/ContentNew.aspx?sp=contentPage268,,N,N
+Playlist,/PlugList.aspx,,N,N
+"Our Rooms",/chooseroom.aspx?all=1,,N,N
+"Our Menu",/ContentNew.aspx?sp=Menu,,N,N
+Shop,/Shopping.aspx,,N,N
+Gallery,/gallery.aspx,,N,N
+Blank,/files/personalFiles/1079/userfile_26052017_2153.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_26052017_2025.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_26052017_2107.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_26052017_2155.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_26052017_2121.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_26052017_2141.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_26052017_2137.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_26052017_2108.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_26052017_2128.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_26052017_2159.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_05062017_1534.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_05062017_1556.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_05062017_1515.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_05062017_1517.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_05062017_1539.JPG,,N,N
+Blank,/files/personalFiles/1079/userfile_05062017_1555.JPG,,N,N
+"Contact Us",/Contact.aspx,,N,N
