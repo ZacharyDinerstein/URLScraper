@@ -63,7 +63,7 @@
     * XXX
     */
     function runProgram($hrefs, $parsedPath){
-        $essentialURLs = removeExternalLinks($hrefs, $parsedPath);
+        $essentialURLs = removeExternalLinks($hrefs, $parsedPath, true);
         $essentialURLs = removePhoneNums($essentialURLs);
         $essentialURLs = removeWhiteSpace($essentialURLs);
         $essentialURLs = removePrePath($essentialURLs, $parsedPath);
@@ -84,24 +84,22 @@
     function removeExternalLinks($oldURLs, $parsedPath){
         $list = array();
 
-        // printResultsSimple("<h2>Full Array before removeExternalLinks</h2>");
+        printResultsSimple("<h2>Full Array before removeExternalLinks</h2>");
 
         for ($i = 0; $i < $oldURLs->length; $i++) {
             $href = $oldURLs->item($i);
             $url = $href->getAttribute('href');
             $parsedUrl = parse_url($url);
 
-            // printResultsSimple($url);
+            printResultsSimple($url);
             
             if(isset($parsedUrl["host"]) && ( $parsedUrl["host"] != $parsedPath['host']) ){
                 //this is a link to an external site - we dont want it, do nothing 
-            }
-            else {
+            } else {
                 array_push($list, $href);
-            }
+            } 
         }
 
-        // echo "Length: " . $i . "<br />";
         return $list;
     }
 
@@ -111,7 +109,7 @@
     *   if => If href is a legitimate path, add to array.
     */   
     function removePhoneNums($oldURLs){
-        // printResultsSimple("<h2>Array before removePhoneNums</h2>");
+        printResultsSimple("<h2>Array before removePhoneNums</h2>");
         $matchUrl = array();
         $i = 0;
 
@@ -123,7 +121,7 @@
            }
            $i++;
         }
-        // echo "Length: " . $i . "<br />";
+        echo "Length: " . $i . "<br />";
         return $matchUrl;
     }
 
@@ -249,7 +247,7 @@
 
         foreach ($oldURLs as $item){
             $href = ($item->getAttribute('href'));
-            // echo $href . "<br />";
+            echo $href . "<br />";
         }
         return $oldURLs;
     }
@@ -294,12 +292,28 @@
         fclose($file);
     }
 
-    function extendUrls($oldURLs){
-        $masterUrls = array();
+    function findSecondLevelURLs($firstLevelURLs, $path){
+        $newURLs = array();
+        $num = 0;
+        echo "<br />";
 
-        foreach($oldURLs as $item){
+
+        foreach($firstLevelURLs as $item){
+            $href = $item->getAttribute('href');
+            $url = $path . $href;
+
+            $hrefs = grabHrefs($url);
             
+            $secondLevelUrls = removeExternalLinks($hrefs, $parsedPath);
+            $secondLevelUrls = removePhoneNums($secondLevelUrls);
+            $secondLevelUrls = removeWhiteSpace($secondLevelUrls);
+            $secondLevelUrls = removePrePath($secondLevelUrls, $parsedPath);
+            $secondLevelUrls = addForwardSlashs($secondLevelUrls);
+
+            array_push($newURLs, $secondLevelUrls);
+            $num++;
         }
+        var_dump($newURLs);
     }
 
 
@@ -308,9 +322,9 @@
     $hrefs = grabHrefs($path);
 
     $essentialURLs = runProgram($hrefs, $parsedPath);
-    extendUrls($essentialURLs);
-    createCSV($essentialURLs);
+    $secondLevelURLs = findSecondLevelURLs($essentialURLs, $path);
 
+    createCSV($essentialURLs);
 ?>
 
 
@@ -319,6 +333,8 @@
 <!-- 
 ***TO DO***
 - Allow program to scrape the second level of urls on any site, not just the root URL
+    - Itterate through essentialURLS array and push results into a new array
+
 
 - make the scrapper add in a blank entry & an "/" entry for every site.
 
@@ -335,8 +351,6 @@ CHECKLIST
     Number of links each site should have:
         - Plugin Karaoke = 19 w/o root urls ('', '/', '/#');
         - Plaza College = About 83  (We only have 45)
-
-
 
 
 
