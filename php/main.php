@@ -15,11 +15,6 @@
         echo "Length: " . count($bigArray);
     }
 
-
-   /* XXX
-    *   printResultsSimple => print string value to screen for debugging.
-    * XXX
-    */    
     function printResultsSimple($value){
         echo $value . "<br />";
     }
@@ -35,17 +30,16 @@
         echo '<br />';
     }
 
+
    /* MAIN FUNCTIONS */      
 
-
-    function grabURLPath(){
+    function grabURL(){
         return $path = $_GET['url'];
 
     }
 
-    function grabParsedPath($path){
-
-        return $parsedPath = parse_url($path);
+    function grabParsedUrl($url){
+        return $parsedUrl = parse_url($url);
     }
         
     function grabHrefs($path){
@@ -59,14 +53,14 @@
     }
 
    /* XXX
-    *   runProgram => Run through program and strip hrefs down to essentials
+    *   findFirstLevelPaths => Run through program and strip hrefs down to essentials
     * XXX
     */
-    function runProgram($hrefs, $parsedPath){
-        $essentialURLs = removeExternalLinks($hrefs, $parsedPath, true);
-        $essentialURLs = removePhoneNums($essentialURLs);
+    function findFirstLevelPaths($hrefs, $parsedUrl){
+        $essentialURLs = removeExternalLinks($hrefs, $parsedUrl, true);
+        $essentialURLs = removeBadLinks($essentialURLs);
         $essentialURLs = removeWhiteSpace($essentialURLs);
-        $essentialURLs = removePrePath($essentialURLs, $parsedPath);
+        $essentialURLs = removePrePath($essentialURLs, $parsedUrl);
         $essentialURLs = addForwardSlashs($essentialURLs);
         $essentialURLs = removeDuplicates($essentialURLs);
         printResults("Essential URLS", $essentialURLs, 'href');
@@ -81,35 +75,46 @@
     *           isn't equal to our root Url, don't add to array.
     * XXX
     */
-    function removeExternalLinks($oldURLs, $parsedPath){
+    function removeExternalLinks($oldURLs, $parsedUrl){
         $list = array();
-
         printResultsSimple("<h2>Full Array before removeExternalLinks</h2>");
 
         for ($i = 0; $i < $oldURLs->length; $i++) {
-            $href = $oldURLs->item($i);
-            $url = $href->getAttribute('href');
-            $parsedUrl = parse_url($url);
+            $item = $oldURLs->item($i);
 
-            printResultsSimple($url);
-            
-            if(isset($parsedUrl["host"]) && ( $parsedUrl["host"] != $parsedPath['host']) ){
+            // Print attribute values of DOM element to screen
+            echo "<br />HREF from First Pass ". $i . ":<br>";
+            if ($item->hasAttributes()) {
+              foreach ($item->attributes as $attr) {
+                $name = $attr->nodeName;
+                $value = $attr->nodeValue;
+                echo "'$name' :: '$value'<br />";
+              }
+            }
+
+            echo "<br><br>";
+
+            $href = $item->getAttribute('href');
+            $parsedHref = parse_url($href);
+
+            printResultsSimple($href);
+
+            if(isset($parsedHref["host"]) && ( $parsedHref["host"] != $parsedUrl['host']) ){
                 //this is a link to an external site - we dont want it, do nothing 
             } else {
-                array_push($list, $href);
+                array_push($list, $item);
             } 
         }
-
         return $list;
     }
 
 
    /* 
-    * XXX  removePhoneNums => Remove phone numbers from array.
+    * XXX  removeBadLinks => Remove phone numbers from array.
     *   if => If href is a legitimate path, add to array.
     */   
-    function removePhoneNums($oldURLs){
-        printResultsSimple("<h2>Array before removePhoneNums</h2>");
+    function removeBadLinks($oldURLs){
+        printResultsSimple("<h2>Array before removeBadLinks</h2>");
         $matchUrl = array();
         $i = 0;
 
@@ -212,9 +217,8 @@
         echo "<h2>CLEAN ARRAY</h2>"; 
         foreach ($cleanArray as $item) {
             $href = ($item->getAttribute('href'));
-
-            printResultsSimple($href);
         }
+
         return $cleanArray;
     }
 
@@ -292,37 +296,38 @@
         fclose($file);
     }
 
-    function findSecondLevelURLs($firstLevelURLs, $path){
+    function findSecondLevelPaths($firstLevelURLs, $path){
         $newURLs = array();
-        $num = 0;
-        echo "<br />";
 
+        for ($i = 0; $i < $firstLevelURLs->length; $i++) {
+            $item = $firstLevelURLs->item($i);     
 
-        foreach($firstLevelURLs as $item){
             $href = $item->getAttribute('href');
+            echo "<br />" . $href;
             $url = $path . $href;
+
+            
 
             $hrefs = grabHrefs($url);
             
-            $secondLevelUrls = removeExternalLinks($hrefs, $parsedPath);
-            $secondLevelUrls = removePhoneNums($secondLevelUrls);
-            $secondLevelUrls = removeWhiteSpace($secondLevelUrls);
-            $secondLevelUrls = removePrePath($secondLevelUrls, $parsedPath);
-            $secondLevelUrls = addForwardSlashs($secondLevelUrls);
+            // $secondLevelUrls = removeExternalLinks($hrefs, $parsedPath);
+            // $secondLevelUrls = removeBadLinks($secondLevelUrls);
+            // $secondLevelUrls = removeWhiteSpace($secondLevelUrls);
+            // $secondLevelUrls = removePrePath($secondLevelUrls, $parsedPath);
+            // $secondLevelUrls = addForwardSlashs($secondLevelUrls);
 
             array_push($newURLs, $secondLevelUrls);
-            $num++;
         }
         var_dump($newURLs);
     }
 
 
-    $path = grabURLPath();
-    $parsedPath = grabParsedPath($path);
-    $hrefs = grabHrefs($path);
+    $url = grabURL();
+    $parsedUrl = grabParsedUrl($url);
+    $hrefs = grabHrefs($url);
 
-    $essentialURLs = runProgram($hrefs, $parsedPath);
-    $secondLevelURLs = findSecondLevelURLs($essentialURLs, $path);
+    $essentialURLs = findFirstLevelPaths($hrefs, $parsedUrl);
+    $secondLevelURLs = findSecondLevelPaths($essentialURLs, $url);
 
     createCSV($essentialURLs);
 ?>
@@ -334,6 +339,7 @@
 ***TO DO***
 - Allow program to scrape the second level of urls on any site, not just the root URL
     - Itterate through essentialURLS array and push results into a new array
+    - See all entries printed out.
 
 
 - make the scrapper add in a blank entry & an "/" entry for every site.
