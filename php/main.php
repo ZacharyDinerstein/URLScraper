@@ -42,8 +42,8 @@
         return $parsedUrl = parse_url($url);
     }
         
-    function grabHrefs($path){
-        $html = file_get_contents($path);
+    function grabHrefs($url){
+        $html = file_get_contents($url);
         $dom = new DOMDocument();
         @$dom->loadHTML($html);
 
@@ -57,7 +57,7 @@
     * XXX
     */
     function findFirstLevelPaths($hrefs, $parsedUrl){
-        $essentialURLs = removeExternalLinks($hrefs, $parsedUrl, true);
+        $essentialURLs = removeExternalLinks($hrefs, $parsedUrl);
         $essentialURLs = removeBadLinks($essentialURLs);
         $essentialURLs = removeWhiteSpace($essentialURLs);
         $essentialURLs = removePrePath($essentialURLs, $parsedUrl);
@@ -296,29 +296,65 @@
         fclose($file);
     }
 
-    function findSecondLevelPaths($firstLevelURLs, $path){
-        $newURLs = array();
+    function findSecondLevelPaths($firstLevelPaths, $path, $parsedUrl){
+        echo "<h2>All Second Level HREFS:</h2>";
 
-        for ($i = 0; $i < $firstLevelURLs->length; $i++) {
-            $item = $firstLevelURLs->item($i);     
+        $newArray = array();
+        $i = 0;
 
+        // Itterate through firstLevelPaths and grab href from each.
+        foreach ($firstLevelPaths as $item){
             $href = $item->getAttribute('href');
-            echo "<br />" . $href;
             $url = $path . $href;
 
-            
-
+            // Scrape URL and grab all Hrefs from that page.
             $hrefs = grabHrefs($url);
+
+            // Itterate through those Hrefs and print each to screen.
+            foreach ($hrefs as $result){
+                $i++;
+                $href = $result->getAttribute('href');
+                echo "<br />" . $href;
+
+                $internalLink = deleteIfExternalLink($href, $parsedUrl);
+                if ($internalLink != ''){
+                    array_push($newArray, $internalLink);
+                }
+            }
             
             // $secondLevelUrls = removeExternalLinks($hrefs, $parsedPath);
             // $secondLevelUrls = removeBadLinks($secondLevelUrls);
             // $secondLevelUrls = removeWhiteSpace($secondLevelUrls);
             // $secondLevelUrls = removePrePath($secondLevelUrls, $parsedPath);
             // $secondLevelUrls = addForwardSlashs($secondLevelUrls);
-
-            array_push($newURLs, $secondLevelUrls);
+            // array_push($newURLs, $secondLevelUrls);
+            echo "Length: " . $i;
         }
-        var_dump($newURLs);
+
+        echo "<h2> New Array, No External Links</h2>";
+        foreach ($newArray as $item){
+            echo "<br / >" . $item;
+        }
+    }
+
+    function deleteIfExternalLink($href, $parsedUrl){
+            // Print attribute values of DOM element to screen
+            // echo "<br />HREF from First Pass ". $i . ":<br>";
+            // if ($item->hasAttributes()) {
+            //   foreach ($item->attributes as $attr) {
+            //     $name = $attr->nodeName;
+            //     $value = $attr->nodeValue;
+            //     echo "'$name' :: '$value'<br />";
+            //   }
+            // }
+
+            $parsedHref = parse_url($href);
+
+            if(isset($parsedHref["host"]) && ( $parsedHref["host"] != $parsedUrl['host']) ){
+                //this is a link to an external site - we dont want it, do nothing 
+            } else {
+                return $href; 
+            } 
     }
 
 
@@ -327,7 +363,7 @@
     $hrefs = grabHrefs($url);
 
     $essentialURLs = findFirstLevelPaths($hrefs, $parsedUrl);
-    $secondLevelURLs = findSecondLevelPaths($essentialURLs, $url);
+    $secondLevelURLs = findSecondLevelPaths($essentialURLs, $url, $parsedUrl);
 
     createCSV($essentialURLs);
 ?>
