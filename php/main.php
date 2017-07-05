@@ -299,62 +299,110 @@
     function findSecondLevelPaths($firstLevelPaths, $path, $parsedUrl){
         echo "<h2>All Second Level HREFS:</h2>";
 
-        $newArray = array();
+        $secondLevelPaths = array();
         $i = 0;
 
         // Itterate through firstLevelPaths and grab href from each.
-        foreach ($firstLevelPaths as $item){
-            $href = $item->getAttribute('href');
+        foreach ($firstLevelPaths as $firstLevelPath){
+            $href = $firstLevelPath->getAttribute('href');
             $url = $path . $href;
 
             // Scrape URL and grab all Hrefs from that page.
             $hrefs = grabHrefs($url);
 
             // Itterate through those Hrefs and print each to screen.
-            foreach ($hrefs as $result){
+            foreach ($hrefs as $hrefObject){
                 $i++;
-                $href = $result->getAttribute('href');
+
+                $href = $hrefObject->getAttribute('href');
                 echo "<br />" . $href;
 
-                $internalLink = deleteIfExternalLink($href, $parsedUrl);
-                if ($internalLink != ''){
-                    array_push($newArray, $internalLink);
+                $href = deleteIfExternalLink($href, $parsedUrl);
+                if ($href != ''){
+                    // $href = deleteIfBadLink($href);
+                    // $href = removeHrefWhiteSpace($href);
+                    // $hrefObject = removeHrefPrePath();
+
+
+                    // array_push($newArray, $essentialURL);
+                    array_push($secondLevelPaths, $hrefObject);
                 }
             }
-            
-            // $secondLevelUrls = removeExternalLinks($hrefs, $parsedPath);
-            // $secondLevelUrls = removeBadLinks($secondLevelUrls);
-            // $secondLevelUrls = removeWhiteSpace($secondLevelUrls);
+
+            // $item = removeHrefPrePath($item, $parsedUrl);
             // $secondLevelUrls = removePrePath($secondLevelUrls, $parsedPath);
             // $secondLevelUrls = addForwardSlashs($secondLevelUrls);
             // array_push($newURLs, $secondLevelUrls);
             echo "Length: " . $i;
         }
-
-        echo "<h2> New Array, No External Links</h2>";
-        foreach ($newArray as $item){
-            echo "<br / >" . $item;
+        echo "<h2>Second Level Paths W/O External Links</h2>";
+        foreach ($secondLevelPaths as $secondLevelPath) {
+            $href = $secondLevelPath->getAttribute('href');
+            echo "<br>" . $href;
         }
+
     }
 
-    function deleteIfExternalLink($href, $parsedUrl){
-            // Print attribute values of DOM element to screen
-            // echo "<br />HREF from First Pass ". $i . ":<br>";
-            // if ($item->hasAttributes()) {
-            //   foreach ($item->attributes as $attr) {
-            //     $name = $attr->nodeName;
-            //     $value = $attr->nodeValue;
-            //     echo "'$name' :: '$value'<br />";
-            //   }
-            // }
 
+
+
+
+
+
+    function deleteIfExternalLink($href, $parsedUrl){
             $parsedHref = parse_url($href);
 
             if(isset($parsedHref["host"]) && ( $parsedHref["host"] != $parsedUrl['host']) ){
-                //this is a link to an external site - we dont want it, do nothing 
+                //this is a link to an external site - we dont want it, do nothing
+                echo "<br>Deleted External Link: " . $href . "<br />"; 
             } else {
                 return $href; 
             } 
+    }
+
+    function deleteIfBadLink($href){
+        if (preg_match("(\/([a-zA-Z0-9+\$_-]\.?)+|(\D\.\D))", $href ) ){
+            return $href;
+       } else {
+        echo "<br>Deleted Bad Link: " . $href . "<br />";
+       }
+    }
+
+    function removeHrefWhiteSpace($href){
+            for ($i = 0; $i < $href->attributes->length; ++$i) {
+                echo "WORKING";
+                $href->attributes->item($i)->nodeValue = str_replace(' ', '%20', trim($href->attributes->item($i)->nodeValue));
+            }
+        return $href;
+    }
+
+    function removeHrefPrePath($href, $parsedUrl){
+        $i = 0;
+
+        if (strpos($href, $parsedUrl['host']) !== false) {
+            $newHref = strstr($href, $parsedUrl['host']);
+            echo "NEW HREF: " . $newHref . "<br />";
+            $newHref = str_replace($parsedUrl['host'], '', $newHref);
+            echo "NEWER HREF: " . $newHref . "<br />";
+
+            for ($i = 0; $i < $hrefObject->attributes->length; ++$i){
+                $hrefObject->attributes->item($i)->nodeValue = $newHref;
+            }
+
+            $printIt = $hrefObject->getAttribute('href');
+            echo "No Pre PATH: ";
+            printResultsSimple($printIt);
+        }
+        echo "<br />";
+
+        printResultsSimple("<h2>Array after removePrePath</h2>");
+        foreach ($oldURLs as $item) {
+            $href = ($item->getAttribute('href'));
+            printResultsSimple($href);
+        }
+
+        echo "Length: " . $i . "<br />";
+        return $hrefObject;
     }
 
 
