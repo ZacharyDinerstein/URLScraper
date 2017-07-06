@@ -342,13 +342,17 @@
             echo "Length: " . $totalNumOfLinks;
         }
         $j = 0;
-        echo "<h2>Second Level Paths W/O External Links</h2>";
+        echo "<h2>Second Level Paths full list before duplicate removal</h2>";
         foreach ($secondLevelPaths as $secondLevelPath) {
             $href = $secondLevelPath->getAttribute('href');
             echo "<br>" . $href;
             $j++;
         }
         echo "<br>Length: " . $j;
+
+
+        //Add $essentialURLs array to $SecondLevelPaths
+        // Remove All Duplicates
     }
 
 
