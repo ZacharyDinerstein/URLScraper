@@ -334,8 +334,7 @@
 
                 if ($href != ''){
                     $hrefObject->attributes->item(0)->nodeValue = $href;
-                    echo "<br>hrefObject: ";
-                    var_dump($hrefObject);
+                    echo "<br>New Href Property: " . $hrefObject->getAttribute('href');
                     array_push($secondLevelPaths, $hrefObject);
                 }
             }
