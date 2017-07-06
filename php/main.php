@@ -326,22 +326,20 @@
                 $href = removeHrefWhiteSpace($href);
                 echo "<br />After remove White Space: " . $href;
 
+                $href = removeHrefPrePath($href, $parsedUrl);
+                echo "<br />After remove Pre Path: " . $href;
 
+                $href = addForwardSlash($href);
+                echo "<br />After Add Forward Slash: " . $href;
 
                 if ($href != ''){
-
-                    // $hrefObject = removeHrefPrePath();
-
-
-                    // array_push($newArray, $essentialURL);
+                    $hrefObject->attributes->item(0)->nodeValue = $href;
+                    echo "<br>hrefObject: ";
+                    var_dump($hrefObject);
                     array_push($secondLevelPaths, $hrefObject);
                 }
             }
 
-            // $item = removeHrefPrePath($item, $parsedUrl);
-            // $secondLevelUrls = removePrePath($secondLevelUrls, $parsedPath);
-            // $secondLevelUrls = addForwardSlashs($secondLevelUrls);
-            // array_push($newURLs, $secondLevelUrls);
             echo "Length: " . $totalNumOfLinks;
         }
         $j = 0;
@@ -385,33 +383,25 @@
     }
 
     function removeHrefPrePath($href, $parsedUrl){
-        $i = 0;
-
         if (strpos($href, $parsedUrl['host']) !== false) {
             $newHref = strstr($href, $parsedUrl['host']);
             echo "NEW HREF: " . $newHref . "<br />";
             $newHref = str_replace($parsedUrl['host'], '', $newHref);
             echo "NEWER HREF: " . $newHref . "<br />";
-
-            for ($i = 0; $i < $hrefObject->attributes->length; ++$i){
-                $hrefObject->attributes->item($i)->nodeValue = $newHref;
-            }
-
-            $printIt = $hrefObject->getAttribute('href');
-            echo "No Pre PATH: ";
-            printResultsSimple($printIt);
         }
-        echo "<br />";
-
-        printResultsSimple("<h2>Array after removePrePath</h2>");
-        foreach ($oldURLs as $item) {
-            $href = ($item->getAttribute('href'));
-            printResultsSimple($href);
-        }
-
-        echo "Length: " . $i . "<br />";
-        return $hrefObject;
+        return $href;
     }
+
+   function addForwardSlash($href){
+        $firstChar = (substr( $href, 0, 1 ));
+
+        if (($href !== '') && ($firstChar !== "/")){
+            $href = "/" . $href;
+        }
+        return $href;
+    }
+
+
 
 
     $url = grabURL();
