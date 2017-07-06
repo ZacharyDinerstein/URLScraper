@@ -300,7 +300,7 @@
         echo "<h2>All Second Level HREFS:</h2>";
 
         $secondLevelPaths = array();
-        $i = 0;
+        $totalNumOfLinks = 0;
 
         // Itterate through firstLevelPaths and grab href from each.
         foreach ($firstLevelPaths as $firstLevelPath){
@@ -312,15 +312,24 @@
 
             // Itterate through those Hrefs and print each to screen.
             foreach ($hrefs as $hrefObject){
-                $i++;
+                $totalNumOfLinks++;
 
                 $href = $hrefObject->getAttribute('href');
-                echo "<br />" . $href;
+                echo "<br /><br />" . $href;
 
                 $href = deleteIfExternalLink($href, $parsedUrl);
+                echo "<br />After delete External Link: " . $href;
+
+                $href = deleteIfBadLink($href);
+                echo "<br />After delete Bad Link: " . $href;
+
+                $href = removeHrefWhiteSpace($href);
+                echo "<br />After remove White Space: " . $href;
+
+
+
                 if ($href != ''){
-                    // $href = deleteIfBadLink($href);
-                    // $href = removeHrefWhiteSpace($href);
+
                     // $hrefObject = removeHrefPrePath();
 
 
@@ -333,14 +342,16 @@
             // $secondLevelUrls = removePrePath($secondLevelUrls, $parsedPath);
             // $secondLevelUrls = addForwardSlashs($secondLevelUrls);
             // array_push($newURLs, $secondLevelUrls);
-            echo "Length: " . $i;
+            echo "Length: " . $totalNumOfLinks;
         }
+        $j = 0;
         echo "<h2>Second Level Paths W/O External Links</h2>";
         foreach ($secondLevelPaths as $secondLevelPath) {
             $href = $secondLevelPath->getAttribute('href');
             echo "<br>" . $href;
+            $j++;
         }
-
+        echo "<br>Length: " . $j;
     }
 
 
@@ -354,7 +365,7 @@
 
             if(isset($parsedHref["host"]) && ( $parsedHref["host"] != $parsedUrl['host']) ){
                 //this is a link to an external site - we dont want it, do nothing
-                echo "<br>Deleted External Link: " . $href . "<br />"; 
+                echo "<br>Deleted External Link: " . $href; 
             } else {
                 return $href; 
             } 
@@ -364,16 +375,13 @@
         if (preg_match("(\/([a-zA-Z0-9+\$_-]\.?)+|(\D\.\D))", $href ) ){
             return $href;
        } else {
-        echo "<br>Deleted Bad Link: " . $href . "<br />";
+        echo "<br>Deleted Bad Link: " . $href;
        }
     }
 
     function removeHrefWhiteSpace($href){
-            for ($i = 0; $i < $href->attributes->length; ++$i) {
-                echo "WORKING";
-                $href->attributes->item($i)->nodeValue = str_replace(' ', '%20', trim($href->attributes->item($i)->nodeValue));
-            }
-        return $href;
+        echo "<br>REMOVING WHITE SPACE: " . $href;
+        return str_replace(' ', '%20', trim($href));
     }
 
     function removeHrefPrePath($href, $parsedUrl){
@@ -425,6 +433,10 @@
     - Itterate through essentialURLS array and push results into a new array
     - See all entries printed out.
 
+
+
+- Taylor deleteBadLinks to not delete entries with '#' in the title. 
+    - Add in linke to remove "tel" and "mailtto:"
 
 - make the scrapper add in a blank entry & an "/" entry for every site.
 
