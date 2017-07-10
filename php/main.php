@@ -29,17 +29,27 @@
         var_dump($parsedPath[$var]);
         echo '<br />';
     }
-
+    function startTimer($time_pre){
+        return $time_pre = microtime(true);
+    }
+    function stopTimer($time_pre){
+        $time_post = microtime(true);
+        $exec_time = $time_post - $time_pre;
+        echo "<br>Total Time: " . $exec_time;
+    }
 
    /* MAIN FUNCTIONS */      
 
     function grabURL(){
-        return $path = $_GET['url'];
-
+        $path = $_GET['url'];
+        echo "<br>Original Path: " . $path;
+        return $path;
     }
 
     function grabParsedUrl($url){
-        return $parsedUrl = parse_url($url);
+        $parsedUrl = parse_url($url);
+        echo "<br> Parsed URL Host: " . $parsedUrl['host'];
+        return $parsedUrl;
     }
         
     function grabHrefs($url){
@@ -66,7 +76,6 @@
         printResults("Essential URLS", $essentialURLs, 'href');
         return $essentialURLs;
     }
-
 
    /* XXX
     * RemoveExternalLinks => Keep only array items that are internal links
@@ -296,10 +305,10 @@
         fclose($file);
     }
 
-    function findSecondLevelPaths($firstLevelPaths, $path, $parsedUrl){
+    function findDeaperLevelPaths($firstLevelPaths, $path, $parsedUrl){
         echo "<h2>All Second Level HREFS:</h2>";
 
-        $secondLevelPaths = array();
+        $deaperLevelPaths = array();
         $totalNumOfLinks = 0;
 
         // Itterate through firstLevelPaths and grab href from each.
@@ -335,46 +344,59 @@
                 if ($href != ''){
                     $hrefObject->attributes->item(0)->nodeValue = $href;
                     echo "<br>New Href Property: " . $hrefObject->getAttribute('href');
-                    array_push($secondLevelPaths, $hrefObject);
+                    array_push($deaperLevelPaths, $hrefObject);
                 }
+
             }
 
             echo "Length: " . $totalNumOfLinks;
         }
+
+        foreach($firstLevelPath as $firstLevelPath){
+          array_push($deaperLevelPaths, $firstLevelPath);
+        }
+
         $j = 0;
         echo "<h2>Second Level Paths full list before duplicate removal</h2>";
-        foreach ($secondLevelPaths as $secondLevelPath) {
-            $href = $secondLevelPath->getAttribute('href');
+        foreach ($deaperLevelPaths as $deaperLevelPath) {
+            $href = $deaperLevelPath->getAttribute('href');
             echo "<br>" . $href;
             $j++;
         }
         echo "<br>Length: " . $j;
 
 
-        //Add $essentialURLs array to $SecondLevelPaths
-        // Remove All Duplicates
+        $masterURLS = removeDeaperDuplicates($deaperLevelPaths);
+        $masterURLS = addForwardSlashs($masterURLS);
+
+        $k = 0;
+        echo "<h2>Master Level Paths after remove duplicates</h2>";
+        foreach ($masterURLS as $masterURL) {
+            $href = $masterURL->getAttribute('href');
+            echo "<br>" . $href;
+            $k++;
+        }
+        echo "<br>Length: " . $k;
+
+        return $masterURLS;
     }
 
-
-
-
-
-
-
     function deleteIfExternalLink($href, $parsedUrl){
-            $parsedHref = parse_url($href);
+        $parsedHref = parse_url($href);
 
-            if(isset($parsedHref["host"]) && ( $parsedHref["host"] != $parsedUrl['host']) ){
-                //this is a link to an external site - we dont want it, do nothing
-                echo "<br>Deleted External Link: " . $href; 
-            } else {
-                return $href; 
-            } 
+        if(isset($parsedHref["host"]) && ( $parsedHref["host"] != $parsedUrl['host']) ){
+            //this is a link to an external site - we dont want it, do nothing
+            echo "<br>Deleted External Link: " . $href; 
+        } else {
+            return $href;
+        } 
     }
 
     function deleteIfBadLink($href){
         if (preg_match("(\/([a-zA-Z0-9+\$_-]\.?)+|(\D\.\D))", $href ) ){
-            return $href;
+            if(!preg_match_all("/\<|javascript:void|mailto:|tel:/", $href )){
+                return $href;
+            }
        } else {
         echo "<br>Deleted Bad Link: " . $href;
        }
@@ -404,17 +426,55 @@
         return $href;
     }
 
+    // Removes Second Level Duplicates
+    function removeDeaperDuplicates($oldURLs){
+        $cleanArray = array();
+        $duplicates = array();
+        $i = 0;
+
+        printResultsSimple("<h2>Array before removeDuplicates</h2>");
+        foreach ($oldURLs as $item) {
+            $href = ($item->getAttribute('href'));
+
+            if ( !in_array($href, $duplicates)) {
+                array_push($duplicates, $href);
+                array_push($cleanArray, $item);           
+            } 
+            printResultsSimple($href);
+            $i++;
+        }
+        echo "Length: " . $i . "<br />";
+
+        echo "<h2>DUPLICATES</h2>";
+        foreach ($duplicates as $duplicate) {
+            $href = ($item->getAttribute('href'));
+            echo $duplicate . "<br />";
+        }
+
+        echo "<h2>CLEAN ARRAY</h2>"; 
+        foreach ($cleanArray as $item) {
+            $href = ($item->getAttribute('href'));
+        }
+
+        return $cleanArray;
+    }
 
 
+    //Extend max time a loop will run before it's shutdown
+    ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+
+    $time_pre;
+    $time_pre = startTimer($time_pre); microtime(true);
 
     $url = grabURL();
     $parsedUrl = grabParsedUrl($url);
     $hrefs = grabHrefs($url);
 
     $essentialURLs = findFirstLevelPaths($hrefs, $parsedUrl);
-    $secondLevelURLs = findSecondLevelPaths($essentialURLs, $url, $parsedUrl);
+    $masterURLS = findDeaperLevelPaths($essentialURLs, $url, $parsedUrl);
 
-    createCSV($essentialURLs);
+    createCSV($masterURLS);
+    stopTimer($time_pre);
 ?>
 
 
@@ -422,19 +482,18 @@
 
 <!-- 
 ***TO DO***
-- Allow program to scrape the second level of urls on any site, not just the root URL
-    - Itterate through essentialURLS array and push results into a new array
-    - See all entries printed out.
 
-
+- Add function to add a trailing slash onto every entry that isn't an image, and vice versa (remove a trailing slash for all entries that have one)
 
 - Taylor deleteBadLinks to not delete entries with '#' in the title. 
-    - Add in linke to remove "tel" and "mailtto:"
+    - make sure this is working correctly
+
+- make sure Prepath is being removed for each entry.
+
 
 - make the scrapper add in a blank entry & an "/" entry for every site.
 
 - Test on multiple sites to make sure we're not loosing any links that we want to keep. 
-
 
 
 - Build a frontend for program
@@ -442,15 +501,11 @@
 - Refactor var names
 - Comment functions
 
+- Rejigger first level URL parser to use the code of the deapaerLevel URL parsers. Should make program much faster.
+
+
 CHECKLIST
     Number of links each site should have:
-        - Plugin Karaoke = 19 w/o root urls ('', '/', '/#');
-        - Plaza College = About 83  (We only have 45)
-
-
-
-
-    myDump($parsedPath, 'scheme');
-    myDump($parsedPath, 'host');
-    myDump($parsedPath, 'path');
+        - Plugin Karaoke = 19 w/o root urls ('', '/', '/#');  ==>  NEW VERSION: 38
+        - Plaza College = About 83   
  -->
